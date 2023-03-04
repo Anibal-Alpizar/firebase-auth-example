@@ -7,5 +7,19 @@ signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = signupForm["signup-email"].value;
   const passowrd = signupForm["signup-password"].value;
-  await createUserWithEmailAndPassword(auth, email, passowrd);
+  console.log(email, passowrd);
+  try {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      passowrd
+    );
+    console.log(userCredentials);
+    // close the signup modal
+    const signupModal = document.querySelector("#signupModal");
+    const modal = bootstrap.Modal.getInstance(signupModal);
+    modal.hide();
+  } catch (error) {
+    console.log(error);
+  }
 });
